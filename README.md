@@ -12,6 +12,8 @@
 
 ## Showcase
 
+![LazyTown](./images/lazytown.png)
+
 ## What is LazyTown?
 
 LazyTown is a lua-based Neovim configuration with expandability in mind.  All configurations are well-documented, easy to change, and easy to add more plugins.
