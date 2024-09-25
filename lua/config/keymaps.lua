@@ -6,6 +6,31 @@ keymap({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", exp
 keymap({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 keymap({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
+-- slide lines up and down
+keymap("v", "J", ":m '>+1<CR>gv=gv")
+keymap("v", "K", ":m '<-2<CR>gv=gv")
+
+-- keep cursor positioning when using J and K
+keymap("n", "J", "mzJ`z")
+
+-- keep cursor mid-page when using page up/down
+keymap("n", "<C-d>", "<C-d>zz")
+keymap("n", "<C-u>", "<C-u>zz")
+
+-- keep cursor mid-page when searching
+keymap("n", "N", "Nzzzv")
+keymap("n", "n", "nzzzv")
+
+-- keep clipboard when pasting (huge remap)
+keymap("x", "<leader>p", '"_dp')
+keymap({ "x", "v" }, "<leader>d", '"_d')
+
+-- cancel Q
+keymap("n", "Q", "<nop>")
+
+-- switch projects using tmux
+keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
+
 -- move windows using vim keys
 keymap("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 keymap("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
