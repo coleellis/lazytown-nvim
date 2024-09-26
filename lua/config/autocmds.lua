@@ -22,3 +22,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     vim.api.nvim_set_hl(0, "LspReferenceText", { fg = "#FF0000" })
   end,
 })
+
+-- saving with W
+vim.api.nvim_create_user_command("W", function()
+  vim.cmd "w"
+end, {})
