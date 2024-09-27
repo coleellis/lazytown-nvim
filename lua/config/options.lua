@@ -59,4 +59,4 @@ vim.g.markdown_recommended_style = 0 -- Fix terminal size
 -- Change line number colors (overriden by :TransparentEnable)
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#D3D3D3" })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#D3D3D3" })
-vim.api.nvim_set_hl(0, "LineNr", { fg = "white" })
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#FFD700" })

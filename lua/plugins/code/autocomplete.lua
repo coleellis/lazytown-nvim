@@ -1,3 +1,31 @@
+local cmp_kinds = {
+  Text = "  ",
+  Method = "  ",
+  Function = "  ",
+  Constructor = "  ",
+  Field = "  ",
+  Variable = "  ",
+  Class = "  ",
+  Interface = "  ",
+  Module = "  ",
+  Property = "  ",
+  Unit = "  ",
+  Value = "  ",
+  Enum = "  ",
+  Keyword = "  ",
+  Snippet = "  ",
+  Color = "  ",
+  File = "  ",
+  Reference = "  ",
+  Folder = "  ",
+  EnumMember = "  ",
+  Constant = "  ",
+  Struct = "  ",
+  Event = "  ",
+  Operator = "  ",
+  TypeParameter = "  ",
+}
+
 return {
   -- nvim-cmp is the Neovim autocomplete plugin. It provides a context window that works with
   -- the LSPs to allow autocompletion. You can scroll using <Up>/<Down> or <Tab>/<S-Tab> and
@@ -12,6 +40,7 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "petertriho/cmp-git",
       "L3MON4D3/LuaSnip",
       "rafamadriz/friendly-snippets",
     },
@@ -66,6 +95,8 @@ return {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "path" },
+          { name = "git" },
         }, {
           { name = "buffer" },
         }),
@@ -73,6 +104,13 @@ return {
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
+        },
+
+        formatting = {
+          format = function(_, vim_item)
+            vim_item.kind = (cmp_kinds[vim_item.kind] or "") .. vim_item.kind
+            return vim_item
+          end,
         },
 
         experimental = {

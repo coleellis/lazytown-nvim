@@ -12,6 +12,11 @@ return {
       cache = false,
       theme = {
         variant = "default",
+        overrides = function()
+            return {
+                CursorLineNr = { fg = "#FFD700", bg = "NONE" }
+            }
+        end,
       },
       extensions = {
         telescope = true,

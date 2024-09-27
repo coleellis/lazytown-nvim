@@ -65,6 +65,15 @@ keymap("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
 keymap("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 keymap("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
+-- buffers
+keymap("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+keymap("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+keymap("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+keymap("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+keymap("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+keymap("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+keymap("n", "<leader>bd", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+
 -- windows
 keymap("n", "<leader>w", "<c-w>", { desc = "Windows", remap = true })
 keymap("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
