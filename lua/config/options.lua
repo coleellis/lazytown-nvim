@@ -17,7 +17,7 @@ opt.backup = false -- We have undotree, we don't need native backups
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Use global clipboard (+) or ssh clipboard
 opt.conceallevel = 2 -- Hide * on markdown for bold/italic, but not markers with substitutions
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.cursorline = false -- Adds highlighting on current cursor line (disabled for better transparent feel)
+opt.cursorline = true -- Adds highlighting on current cursor line (disabled for better transparent feel)
 opt.expandtab = true -- Use spaces instead of tabs
 opt.fillchars = {
   foldopen = "",
@@ -27,12 +27,12 @@ opt.fillchars = {
   diff = "╱",
   eob = " ",
 }
+opt.foldlevel = 99
 opt.hlsearch = false -- Don't keep terms highlighted post-search
 opt.incsearch = true -- Highlight as you search
 opt.laststatus = 3 -- Global statusline
 opt.mouse = "a" -- Enable mouse
 opt.number = true -- Show current line number
-opt.pumblend = 10 -- Popup blending with background
 opt.pumheight = 10 -- Maximum entries per popup
 opt.relativenumber = true -- Relative line numbering (better for jk keys)
 opt.scrolloff = 8 -- Must show 8 lines when scrolling vertically
@@ -60,6 +60,3 @@ vim.g.markdown_recommended_style = 0 -- Fix terminal size
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#D3D3D3" })
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#D3D3D3" })
 vim.api.nvim_set_hl(0, "LineNr", { fg = "white" })
-
--- Change cursorline color if you want cursorline on
-vim.api.nvim_set_hl(0, "CursorLine", { ctermbg = "none", bg = "none" })

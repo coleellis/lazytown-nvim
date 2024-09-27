@@ -19,17 +19,17 @@ return {
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require "cmp"
       local defaults = require "cmp.config.default"()
-      local auto_select = true
-      local import_luasnip, luasnip = pcall(require, "luasnip")
-      if not import_luasnip then
-        return
-      end
+      require("luasnip.loaders.from_vscode").lazy_load()
+
       return {
         auto_brackets = {},
+
         completion = {
           completeopt = "menu,menuone,noinsert" .. (autoselect and "" or ",noselect"),
         },
+
         preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
+
         mapping = cmp.mapping.preset.insert {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -62,12 +62,19 @@ return {
 
           ["<CR>"] = cmp.mapping.confirm { select = false }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         },
+
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "path" },
+          { name = "luasnip" },
         }, {
           { name = "buffer" },
         }),
+
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+
         experimental = {
           ghost_text = {
             hl_group = "CmpGhostText",

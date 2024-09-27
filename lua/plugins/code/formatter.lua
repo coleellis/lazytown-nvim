@@ -3,33 +3,29 @@ return {
   -- These are viewed using :ConformInfo but also work inside :Mason.
   {
     "stevearc/conform.nvim",
-    dependencies = { "mason.nvim" },
-    lazy = true,
-    cmd = "ConformInfo",
-    keys = {
-      {
-        "<leader>cf",
-        function()
-          require("conform").format { formatters = { "injected" }, timeout_ms = 3000 }
-        end,
-        mode = { "n", "v" },
-        desc = "Format Injected Langs",
-      },
-    },
     opts = {
-      default_format_opts = {
-        timeout_ms = 3000,
-        async = false,
-        quiet = false,
-        lsp_format = "fallback",
-      },
       formatters_by_ft = {
-        javascript = { "prettier" },
         lua = { "stylua" },
         python = { "black" },
-        rust = { "rustfmt", lsp_format = "fallback" },
-        sh = { "shfmt" },
       },
+    },
+  },
+  -- none.ls is a reload of null-ls using Neovim as a language server to
+  -- inject code actions, diagnostics, and formatting.
+  {
+    "nvimtools/none-ls.nvim",
+    config = function()
+      local null_ls = require "null-ls"
+      null_ls.setup {
+        sources = {
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.black,
+        },
+      }
+    end,
+    keys = {
+      { "<leader>gf", vim.lsp.buf.format, {} },
     },
   },
 }
