@@ -43,6 +43,7 @@ opt.sidescrolloff = 8 -- Must show 8 lines when scrolling horizontally
 opt.smartcase = true -- Don't ignore case with capitals
 opt.smartindent = true -- Smart indenting
 opt.splitbelow = true -- New window below current
+opt.splitkeep = "screen" -- Prevent default splitting (edgy)
 opt.splitright = true -- New window right of current
 opt.swapfile = false -- We have undotree, we don't want a swapfile
 opt.tabstop = 4 -- Tabs are 4 spaces

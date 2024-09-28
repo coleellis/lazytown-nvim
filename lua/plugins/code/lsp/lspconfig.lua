@@ -44,8 +44,10 @@ return {
       local lspconfig = require "lspconfig"
       -- setup lsp servers of choice here
       lspconfig.lua_ls.setup { capabilities = capabilities }
-      lspconfig.pylsp.setup { capabilities = capabilities }
+      lspconfig.pyright.setup { capabilities = capabilities }
       lspconfig.clangd.setup { capabilities = capabilities }
+      lspconfig.eslint.setup { capabilities = capabilities }
+      lspconfig.ts_ls.setup { capabilities = capabilities }
     end,
     keys = {
       { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },

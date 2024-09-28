@@ -4,15 +4,16 @@ return {
   -- Files can be opened by using <Enter>.  Create a file using 'a'.
   {
     "nvim-neo-tree/neo-tree.nvim",
+    cmd = { "Neotree" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
     opts = {
-        window = {
-            width = 30,
-        },
+      window = {
+        width = 30,
+      },
     },
     keys = {
       {

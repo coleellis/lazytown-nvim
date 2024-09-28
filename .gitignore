@@ -1,0 +1,2 @@
+# ignore /extras folders (personal plugins and such)
+**/extras

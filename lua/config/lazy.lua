@@ -34,4 +34,4 @@ require("lazy").setup {
 -- colorscheme (requires reload). Ensure it's installed.
 -- Catppuccin, Cyberdream, and Tokyonight are already installed and can be
 -- found inside config.plugins.colorscheme.
-vim.cmd.colorscheme "cyberdream"
+vim.cmd.colorscheme "catppuccin-mocha"
