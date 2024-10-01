@@ -23,6 +23,9 @@ require "config.autocmds"
 require "config.keymaps"
 require "config.options"
 
+-- Get utility functions
+require "util.root"
+
 -- Initiates lazy and tells it to look inside config.plugins for the plugins
 -- list. It also checks for plugin updates each time nvim is started.
 require("lazy").setup {

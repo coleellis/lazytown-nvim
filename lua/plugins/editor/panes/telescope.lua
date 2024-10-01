@@ -18,8 +18,22 @@ return {
       { "<leader>,", "<cmd>Telescope buffers sort_mru=true, sort_lastused=true<cr>", desc = "Switch Buffer" },
       -- find
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files (cwd)" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+      {
+        "<leader>ff",
+        function()
+          require("telescope.builtin").find_files { cwd = vim.g.root }
+        end,
+        desc = "Find Files (root)",
+      },
+      { "<leader>fF", "<cmd>Telescope find_files<cr>", desc = "Find Files (cwd)" },
+      {
+        "<leader>fg",
+        function()
+          require("telescope.builtin").live_grep { cwd = vim.g.root }
+        end,
+        desc = "Live Grep (root)",
+      },
+      { "<leader>fG", "<cmd>Telescope live_grep<cr>", desc = "Live Grep (cwd)" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       -- git

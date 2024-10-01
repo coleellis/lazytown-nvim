@@ -11,21 +11,52 @@ return {
       "MunifTanjim/nui.nvim",
     },
     opts = {
+      close_if_last_window = true,
+      popup_border_style = "rounded",
+      enable_git_status = true,
+      enable_diagnostics = true,
       window = {
         width = 30,
+      },
+      override_by_filename = {
+        [".gitignore"] = {
+          icon = "",
+          color = "#f1502f",
+          name = "Gitignore",
+        },
+      },
+      overide_by_extension = {
+        ["asm"] = {
+          icon = "",
+          color = "#f44336",
+          name = "ASM",
+        },
       },
     },
     keys = {
       {
         "<leader>fe",
         function()
+          require("neo-tree.command").execute { toggle = true, dir = vim.g.root }
+        end,
+        desc = "Explore NeoTree (root)",
+      },
+      {
+        "<leader>e",
+        "<leader>fe",
+        desc = "Explore NeoTree (root)",
+        remap = true,
+      },
+      {
+        "<leader>fE",
+        function()
           require("neo-tree.command").execute { toggle = true, dir = vim.uv.cwd() }
         end,
         desc = "Explore NeoTree (cwd)",
       },
       {
-        "<leader>e",
-        "<leader>fe",
+        "<leader>E",
+        "<leader>fE",
         desc = "Explore NeoTree (cwd)",
         remap = true,
       },
