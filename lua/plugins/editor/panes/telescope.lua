@@ -54,6 +54,7 @@ return {
       { "<leader>sl", "<cmd>Telescope loclist<cr>", desc = "Location List" },
       { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+      { "<leader>sN", "<cmd>Telescope notify<cr>", desc = "Notification History" },
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
       { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
       { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },

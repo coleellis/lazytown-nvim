@@ -14,6 +14,7 @@ local installed = {
   "rust",
   "typescript",
   "vim",
+  "vimdoc",
 }
 
 return {
@@ -51,10 +52,5 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     event = "VeryLazy",
     enabled = true,
-  },
-  -- Automatically adds closing tags inside HTML and JSX.
-  {
-    "windwp/nvim-ts-autotag",
-    opts = {},
   },
 }
