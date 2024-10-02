@@ -56,6 +56,17 @@ keymap("v", ">", ">gv")
 -- quit
 keymap("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
+-- Terminal spawn
+keymap("n", "<leader>ft", function()
+  require("util.terminal").spawn(nil, { cwd = vim.g.root })
+end, { desc = "Terminal (Root)" })
+keymap("n", "<leader>fT", function()
+  require("util.terminal").spawn(nil, { cwd = vim.uv.cwd() })
+end, { desc = "Terminal (cwd)" })
+keymap("n", "<c-_>", function()
+  require("util.terminal").spawn(nil, { cwd = vim.g.root })
+end, { desc = "Terminal (Root)" })
+
 -- terminal mappings
 keymap("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 keymap("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })

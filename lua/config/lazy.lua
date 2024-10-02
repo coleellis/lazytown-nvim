@@ -19,9 +19,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Autocmds: Changes to different events
 -- Keymaps: New key bindins
 -- Options: Standard .vimrc changes.
-require "config.autocmds"
-require "config.keymaps"
 require "config.options"
+require "config.keymaps"
+require "config.autocmds"
 
 -- Get utility functions
 require "util.root"
