@@ -44,7 +44,7 @@ return {
       "L3MON4D3/LuaSnip",
       "rafamadriz/friendly-snippets",
     },
-    opts = function()
+    opts = function(_, opts)
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require "cmp"
       local defaults = require "cmp.config.default"()
@@ -118,7 +118,18 @@ return {
             hl_group = "CmpGhostText",
           },
         },
-        sorting = defaults.sorting,
+        sorting = {
+          comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.recently_used,
+            require "clangd_extensions.cmp_scores",
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
+        },
       }
     end,
   },

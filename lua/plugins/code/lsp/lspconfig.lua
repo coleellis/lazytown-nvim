@@ -1,4 +1,34 @@
 return {
+  {
+    "p00f/clangd_extensions.nvim",
+    lazy = true,
+    config = function() end,
+    opts = {
+      inlay_hints = {
+        inline = false,
+      },
+      ast = {
+        --These require codicons (https://github.com/microsoft/vscode-codicons)
+        role_icons = {
+          type = "",
+          declaration = "",
+          expression = "",
+          specifier = "",
+          statement = "",
+          ["template argument"] = "",
+        },
+        kind_icons = {
+          Compound = "",
+          Recovery = "",
+          TranslationUnit = "",
+          PackExpansion = "",
+          TemplateTypeParm = "",
+          TemplateTemplateParm = "",
+          TemplateParamObject = "",
+        },
+      },
+    },
+  },
   -- mason.nvim drives installation and management of Language Server
   -- Protocol (LSP) servers. LSP Servers are responsible for providing
   -- errors, warning, and other feedback while coding.  In Neovim, we
@@ -7,7 +37,9 @@ return {
     "williamboman/mason.nvim",
     lazy = false,
     config = function()
-      require("mason").setup()
+      require("mason").setup {
+        ensure_installed = { "codelldb" },
+      }
     end,
   },
   -- mason-lspconfig.nvim is the bridge between mason.nvim and
@@ -38,6 +70,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "p00f/clangd_extensions.nvim",
     },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -47,10 +80,47 @@ return {
         capabilities = capabilities,
         settings = { Lua = { diagnostics = { globals = { "vim" } } } },
       }
-      lspconfig.pyright.setup { capabilities = capabilities }
-      lspconfig.clangd.setup { capabilities = capabilities }
+      lspconfig.pylsp.setup { capabilities = capabilities }
       lspconfig.eslint.setup { capabilities = capabilities }
       lspconfig.ts_ls.setup { capabilities = capabilities }
+      lspconfig.cmake.setup { capabilities = capabilities }
+      lspconfig.asm_lsp.setup {
+        capabilities = capabilities,
+        filetypes = { "asm", "nasm" },
+        cmd = { "asm-lsp" },
+      }
+      lspconfig.clangd.setup {
+        capabilities = capabilities,
+        filetypes = { "h", "c", "cpp", "objc", "objcpp" },
+        cmd = {
+          "clangd",
+          "--compile-commands-dir=cmake-build-debug",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=llvm",
+          "--log=verbose",
+        },
+        root_dir = function()
+          if vim.g.root then
+            return vim.g.root
+          end
+          return lspconfig.util.root_pattern("CMakeLists.txt", ".git")
+        end,
+        init_options = {
+          usePlaceholders = true,
+          completeUnimported = true,
+          clangdFileStatus = true,
+          semanticHighlighting = true,
+        },
+        flags = { debounce_text_changes = 150 },
+        on_attach = function()
+          require("clangd_extensions.inlay_hints").setup_autocmd()
+          require("clangd_extensions.inlay_hints").set_inlay_hints()
+        end,
+      }
     end,
     keys = {
       { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
